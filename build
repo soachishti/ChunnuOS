@@ -1,0 +1,41 @@
+#!/bin/bash
+echo "Hello World"
+
+export COMMON_OPTION="-Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -I./include -c"
+
+echo "Compiling Start.asm"
+nasm -f elf32 -o start.o start.asm
+
+gcc $COMMON_OPTION -o general.o general.c
+
+gcc $COMMON_OPTION -o main.o main.c
+
+gcc $COMMON_OPTION -o security.o security.c
+
+gcc $COMMON_OPTION -o scrn.o scrn.c
+
+gcc $COMMON_OPTION -o gdt.o gdt.c
+
+gcc $COMMON_OPTION -o idt.o idt.c
+
+gcc $COMMON_OPTION -o isrs.o isrs.c
+
+gcc $COMMON_OPTION -o irq.o irq.c
+
+gcc $COMMON_OPTION -o timer.o timer.c
+
+gcc $COMMON_OPTION -o kb.o kb.c
+
+gcc $COMMON_OPTION -o time.o time.c
+
+gcc $COMMON_OPTION -o math.o math.c
+
+ld -m elf_i386 -T link.ld -o kernel.bin start.o general.o main.o scrn.o gdt.o idt.o isrs.o irq.o timer.o kb.o security.o time.o math.o
+
+rm *.o
+
+mv kernel.bin img/boot/kernel.bin
+
+grub-mkrescue img -o kernel.img
+
+qemu-system-i386 -hda kernel.img

@@ -1,0 +1,2 @@
+umount /dev/sdb1
+dd bs=4M if=kernel.img of=/dev/sdb1
