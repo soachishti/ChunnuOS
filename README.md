@@ -31,4 +31,5 @@ Use build script in directory for that.
 
 [Bran's Kernel Development](http://www.osdever.net/bkerndev/Docs/title.htm) by Brandon Friesen	
 [Let's write a kernel](http://arjunsreedharan.org/post/82710718100/kernel-101-lets-write-a-kernel) by Arjun Sreedharan
+
 [Writing a bootloader](osandamalith.wordpress.com/2015/10/26/writing-a-bootloader/) By Osanda Malith
