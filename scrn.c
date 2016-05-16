@@ -54,6 +54,11 @@ void move_csr(void)
     outportb(0x3D5, temp);
 }
 
+void gotoxy(int x, int y) {
+    csr_x  = x;
+    csr_y = y;
+}
+
 /* Clears the screen */
 void cls()
 {

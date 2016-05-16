@@ -58,6 +58,7 @@ extern void putch(char c);
 extern void print_int(int num);
 extern void print_float(float num);
 extern void cls();
+extern void gotoxy(int, int);
 extern char getch();
 extern void get(char*, int);
 extern void getline(char *, int);

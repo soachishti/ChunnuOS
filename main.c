@@ -1,9 +1,3 @@
-// shutdown
-// memory speed
-// register speed
-// hlt and wake by timer
-
-
 #include <system.h>
 
 extern int timer_ticks;
@@ -29,12 +23,29 @@ int kmain(void)
     
     __asm__ __volatile__ ("sti");
 
-    //int a = 10;
-    //int b = 0;
-    //putch(a/b);
 
     settextcolor(10, 0);
-    puts("Amuntu [Version 1.0.112]\n");
+    gotoxy(30, 9);
+    puts("Chunnu Operating System\n"); 
+    
+    gotoxy(35, 11);
+    settextcolor(4, 0);
+    puts("Loading");
+    int i;
+    for (i = 0; i < 5; i++) {
+        settextcolor(i+5, 0);
+        putch('.');
+        timer_wait(1); 
+    }
+    cls();
+
+
+    //int a = 10;
+    //int b = 0;
+    //putch(a/b); // Divide by zero error
+
+    settextcolor(10, 0);
+    puts("ChunnuOS [Version 1.0.112]\n");
     settextcolor(10, 0);
     puts("(c) O.B. Corporation. All rights reserved.\n\n");
     settextcolor(8, 0);
@@ -46,7 +57,7 @@ int kmain(void)
         settextcolor(14, 0);
         puts(users[curr_user].username);
         putch('@');
-        puts("ProjectOS:~$ ");
+        puts("ChunnuOS:~$ ");
         
         settextcolor(15, 0);
         get (mnemonic, 80);
@@ -63,7 +74,7 @@ int kmain(void)
         }
         else if (strcmp(mnemonic, "cls") == 0 || strcmp(mnemonic, "clear") == 0) {
             cls();
-        }
+        } 
         else if (strcmp(mnemonic, "echo") == 0) {
             getline(line, 80);
             puts(line);
@@ -103,9 +114,9 @@ int kmain(void)
             if (curr_user == 0) {
                 __asm__ __volatile__ ("cli");
                 outportb(0x64, 0xFE);
-                __asm__ __volatile__ (
-                    "int $15"
-                );
+                //__asm__ __volatile__ (
+                //    "int $15"
+                //);
                 //__asm__ __volatile__ ("int3");
             } else {
                 settextcolor(4, 0);
@@ -126,7 +137,7 @@ int kmain(void)
         else if (strcmp(mnemonic, "about") == 0) {
             settextcolor(6, 0); puts("\nOperating System Project\n\n");
             settextcolor(5, 0); puts("NAME: ");
-            settextcolor(3, 0); puts("Amuntu v1.0.112\n\n");
+            settextcolor(3, 0); puts("ChunnuOS v1.0.112\n\n");
             settextcolor(5, 0); puts("SUBMITTED TO:\n");
             settextcolor(3, 0); puts("Sir Amin\n\n");
             settextcolor(5, 0); puts("DEVELOPED BY:\n"); 
@@ -169,7 +180,7 @@ int kmain(void)
             settextcolor(8, 0);
         }
     }
-    puts("\n============= END OF PROJECT OS =============\n");
+    puts("\n============= END OF ChunnuOS =============\n");
     getline(line, 80);
     outportb(0x64, 0xFE);
     for (;;);
